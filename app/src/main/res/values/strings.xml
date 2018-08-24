@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Validation For Both Email And Phone</string>
+    <string name="enter_email_phone_number">enter email/phone number</string>
+    <string name="validate">Validate</string>
+</resources>

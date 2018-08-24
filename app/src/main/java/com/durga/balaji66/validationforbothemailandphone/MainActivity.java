@@ -33,41 +33,53 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mValidate.setOnClickListener(this);
     }
 
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button:
 
                 /**
-                 * Here we are checking entered text is email or phone number
+                 * Here we are checking editText is empty or not
                  */
-                if (mUsername.getText().toString().trim().matches(regexStr)) {
-                    if (mUsername.getText().toString().length() == 10) {
-                        Toast.makeText(getApplicationContext(), "Valid Mobile Number", Toast.LENGTH_LONG).show();
-                    } else if (mUsername.getText().toString().length() > 10) {
-                        Toast.makeText(getApplicationContext(), "You entered more than 10 digit", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "You entered less than 10 digits", Toast.LENGTH_LONG).show();
-                    }
-                } else {
-                    CharSequence email = mUsername.getText().toString();
+                if(!mUsername.getText().toString().equals(""))
+                {
                     /**
-                     * Here we are checking entered mail is valid or not
+                     * Here we are checking entered text is email or phone number
                      */
-                    if (isValidEmail(email)) {
-                        String last = (String) email;
-                        last = last.substring(last.length() - 4);
-                        if (!last.equals(".com")) {
-                            Toast.makeText(getApplicationContext(), "InValid Email ", Toast.LENGTH_LONG).show();
+                    if (mUsername.getText().toString().trim().matches(regexStr)) {
+                        if (mUsername.getText().toString().length() == 10) {
+                            Toast.makeText(getApplicationContext(), "Valid Mobile Number", Toast.LENGTH_LONG).show();
+                        } else if (mUsername.getText().toString().length() > 10) {
+                            Toast.makeText(getApplicationContext(), "You entered more than 10 digit", Toast.LENGTH_LONG).show();
                         } else {
-                            Toast.makeText(getApplicationContext(), "Valid Email ", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "You entered less than 10 digits", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        CharSequence email = mUsername.getText().toString();
+                        /**
+                         * Here we are checking entered mail is valid or not
+                         */
+                        if (isValidEmail(email)) {
+                            String last = (String) email;
+                            last = last.substring(last.length() - 4);
+                            if (!last.equals(".com")) {
+                                Toast.makeText(getApplicationContext(), "InValid Email ", Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Valid Email ", Toast.LENGTH_LONG).show();
+                            }
+
+                        } else {
+                            Toast.makeText(getApplicationContext(), "InValid Email ", Toast.LENGTH_LONG).show();
                         }
 
-                    } else {
-                        Toast.makeText(getApplicationContext(), "InValid Email ", Toast.LENGTH_LONG).show();
                     }
-
                 }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "Enter Email / Mobile Number ", Toast.LENGTH_LONG).show();
+                }
+
 
                 break;
         }
@@ -82,4 +94,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static boolean isValidEmail(CharSequence target) {
         return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
     }
+
 }
